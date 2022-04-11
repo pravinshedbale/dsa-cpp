@@ -2,13 +2,29 @@
 using namespace std;
 #include "Node.cpp"
 
-Node* getLastNode(Node *head) {
+Node* deleteAtIth(Node *head, int i) {
+    int count=0;
     Node *temp = head;
-    while(temp->next != NULL) {
-        temp = temp->next;
+    if(i==1) {
+        head = temp->next;
+        delete temp;
+        return head;
     }
-    return temp;
-}  
+
+    while(temp!=NULL and count<i-1) {
+        temp = temp->next;
+        count++;
+    }
+    if (temp==NULL or temp->next==NULL)
+        return head;
+    
+    Node *a = temp->next;
+    Node *b = a->next;
+    temp->next = b;
+    delete a;
+    return head;
+}
+
 Node* takeNodes() {
     int data;
     cin>>data;
@@ -36,7 +52,14 @@ void print(Node *head) {
     }
 }
 
-
 int main() {
-    print(takeNodes());
+    int  pos;
+    Node *head = takeNodes();
+    cout<<"Enter Position : ";
+    cin>>pos;
+
+    head = deleteAtIth(head, pos);
+
+    print(head);
+    return 0;
 }

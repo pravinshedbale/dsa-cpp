@@ -2,13 +2,27 @@
 using namespace std;
 #include "Node.cpp"
 
-Node* getLastNode(Node *head) {
+Node* insertAtIth(Node *head, int i, int data) {
+    Node *newNode = new Node(data);
+    int count=0;
     Node *temp = head;
-    while(temp->next != NULL) {
-        temp = temp->next;
+
+    if(i==0) {
+        newNode->next = head;
+        head = newNode;
+        return head;
     }
-    return temp;
-}  
+    while(count < i-1 && temp!=NULL) {
+        temp = temp->next;
+        count++;
+    }
+    if(temp!=NULL) {
+        Node *a = temp->next;
+        temp->next = newNode;
+        newNode->next = a;
+    }
+}
+
 Node* takeNodes() {
     int data;
     cin>>data;
@@ -36,7 +50,17 @@ void print(Node *head) {
     }
 }
 
-
 int main() {
-    print(takeNodes());
+    int data, pos;
+    Node *head = takeNodes();
+    cout<<"Enter Position : ";
+    cin>>pos;
+
+    cout<<"Enter Data : ";
+    cin>>data;
+
+    head = insertAtIth(head, pos, data);
+
+    print(head);
+    return 0;
 }
