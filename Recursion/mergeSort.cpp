@@ -37,6 +37,7 @@ void mergeSort(int *arr, int n) {
 
     mergeSort(left, size1);
     mergeSort(right, size2);
+    
     merge(left, size1, right, size2, arr);
 
 }
