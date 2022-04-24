@@ -1,4 +1,4 @@
-#include<iostream>
+#include<bits/stdc++.h>
 using namespace std;
 
 void merge(int left[], int size1, int right[], int size2, int arr[]) {
