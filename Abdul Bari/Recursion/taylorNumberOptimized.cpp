@@ -3,15 +3,12 @@ using namespace std;
 
 
 double taylorNumber(float x, float n) {
-    static double p=1, f=1;
-    double ans;
-    if(n == 0) 
-        return 1;
-
-    ans = taylorNumber(x,n-1);
-    p = p*x;
-    f = f*n;
-    return ans+(p/f);
+    static double s;
+    if(n==0) {
+        return s;
+    }
+    s = 1+x/n*s;
+    return taylorNumber(x, n-1);
 }
 
 int main() {
