@@ -1,6 +1,5 @@
 #include "Node.cpp"
 Node *head = NULL;
-Node *tail = NULL;
 int size=0;
 Node* getNode(int data){
     Node *newNode  = new Node(data);
@@ -24,7 +23,6 @@ Node* insertAtBeginning(Node *head, int data) {
     Node *newNode = getNode(data);
     if(head==NULL) {
         head = newNode;
-        tail = newNode;
     } else {
         newNode->next = head;
         head = newNode;
@@ -35,22 +33,22 @@ Node* insertAtBeginning(Node *head, int data) {
 
 Node* insertAtEnd(Node *head, int data) {
     Node *newNode = getNode(data);
-    if(head==NULL) {
+    Node *temp = head;
+    if(temp==NULL) {
         head = newNode;
-        tail = newNode;
     } else {
-        tail->next = newNode;
-        tail = newNode;
+        while(temp->next!=NULL) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
     }
-    size++;
     return head;
 }
 
 Node* insertAtPosition(Node *head, int pos, int data) {
     Node *temp = head;
     Node *newNode = new Node(data);
-    int tempPos = pos;
-    if(pos<=1) {
+    if(pos<1) {
         newNode->next = head;
         head = newNode;
         return head;
@@ -59,11 +57,11 @@ Node* insertAtPosition(Node *head, int pos, int data) {
     while(--pos && temp!=NULL) {
         temp = temp->next;
     }
+    if(temp==NULL) {
+        return head;
+    } 
     newNode->next = temp->next;
     temp->next = newNode;
-    if(tempPos==size) {
-        tail = newNode;
-    }
     return head;
 }
 
