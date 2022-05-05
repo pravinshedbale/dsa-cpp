@@ -72,6 +72,29 @@ int getData() {
     return n;
 }
 
+Node* deleteFirstNode(Node *head) {
+    if(head==NULL) {
+        cout<<"List Empty !!";
+        return head;
+    }
+    Node *temp = head;
+    head = temp->next;
+    delete temp;
+    return head;
+}
+
+Node* deleteLastNode(Node *head) {
+    if(head==NULL) {
+        cout<<"List Empty !!";
+        return head;
+    }
+    Node *temp = head;
+    while(temp->next != NULL) {
+        temp = temp->next;
+    }
+    delete temp;
+}
+
 int main() {
     while(1) {
         int choice;
@@ -80,6 +103,7 @@ int main() {
         cout<<"2. INSERT AT BEGINNING"<<endl;
         cout<<"3. INSERT AT END"<<endl;
         cout<<"4. INSERT AT POSITION"<<endl;
+        cout<<"5. DELETE AT BEGINNING"<<endl;
         cin>>choice;
         switch (choice) {
             case 1:
@@ -99,6 +123,11 @@ int main() {
                 cin>>pos;
                 head = insertAtPosition(head, pos, getData());
                 break;
+            
+            case 5:
+                head = deleteFirstNode(head);
+                break;
+
             default:
                 exit(0);
         }
